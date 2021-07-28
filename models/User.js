@@ -12,6 +12,7 @@ checkPassword(loginPw){
 
 
 //define table columns and configuration
+//essentially is the schema.sql
 User.init(
     {
         //TABLE COLUMN DEFINITIONS 
