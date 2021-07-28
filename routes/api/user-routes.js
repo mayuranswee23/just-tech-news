@@ -5,7 +5,7 @@ const { User } = require('../../models');
 router.get('/', (req, res) => {
     //access the user model and run .findall() (<-equivalent to SELECT * FROM users) method
     User.findAll({
-        attributes: {exclude: ['password']}
+        // attributes: {exclude: ['password']}
     })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     User.findOne({
         // same as SELECT * FROM users WHERE id = 1
-        attributes: {exclude: ['password']},
+        // attributes: {exclude: ['password']},
         where: {
             id: req.params.id
         }
@@ -56,7 +56,9 @@ router.put('/:id', (req, res) => {
     // expect username, email, password (same as UPDATE users)
 
     //if req.body has exact key/value paors to match the model, just use req.body instead
+    //pass in req.body instaed to ony update what's passed through
     User.update(req.body, {
+        individualHooks: true,
         where: {
             id: req.params.id
         }
